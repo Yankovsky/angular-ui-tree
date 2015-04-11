@@ -2,6 +2,9 @@
   'use strict';
 
   angular.module('treeApp', ['ui.tree'])
+  .config(function($compileProvider) {
+    $compileProvider.debugInfoEnabled(false);
+  })
   .controller('treeCtrl', function($scope) {
 
     $scope.remove = function(scope) {
@@ -27,7 +30,7 @@
     };
 
     var getRootNodesScope = function() {
-      return angular.element(document.getElementById("tree-root")).scope();
+      return angular.element(document.getElementById("tree-root")).data().$uiTreeController.scope;
     };
 
     $scope.collapseAll = function() {

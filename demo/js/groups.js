@@ -2,6 +2,9 @@
   'use strict';
 
   angular.module('groupsApp', ['ui.tree', 'firebase'])
+  .config(function($compileProvider) {
+    $compileProvider.debugInfoEnabled(false);
+  })
   .value('fbURL', 'https://angular-ui-tree.firebaseio.com/demo/groups/')
   .factory('Groups', function($firebase, fbURL) {
     return $firebase(new Firebase(fbURL)); // jshint ignore:line

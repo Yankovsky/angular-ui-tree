@@ -2,6 +2,9 @@
   'use strict';
 
   angular.module('demoApp', ['ui.tree'])
+  .config(function($compileProvider) {
+    $compileProvider.debugInfoEnabled(false);
+  })
   .controller('MainCtrl', function($scope) {
     $scope.list = [{
       "id": 1,

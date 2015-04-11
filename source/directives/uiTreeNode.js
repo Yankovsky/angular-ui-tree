@@ -55,7 +55,16 @@
 
               // the element which is clicked.
               var eventElm = angular.element(e.target);
-              var eventScope = eventElm.scope();
+
+              // old code: var eventScope = eventElm.scope();
+              // obtain scope data using element.data() instead of element.scope()
+              // so it will work with $compileProvider.debugInfoEnabled(false)
+              var data = eventElm.data();
+              var eventScope;
+              if (data.$uiTreeHandleController) {
+                eventScope = data.$uiTreeHandleController.scope;
+              }
+
               if (!eventScope || !eventScope.$type) {
                 return;
               }
@@ -282,7 +291,17 @@
                 if (!pos.dirAx) {
                   var targetBefore, targetNode;
                   // check it's new position
-                  targetNode = targetElm.scope();
+
+                  // old code: targetNode = targetElm.data();
+                  // obtain scope data using element.data() instead of element.scope()
+                  // so it will work with $compileProvider.debugInfoEnabled(false)
+                  var data = targetElm.data();
+                  if (data.$uiTreeHandleController) {
+                    targetNode = data.$uiTreeHandleController.scope;
+                  } else if (data.$uiTreeNodesController) {
+                    targetNode = data.$uiTreeNodesController.scope;
+                  }
+
                   var isEmpty = false;
                   if (!targetNode) {
                     return;

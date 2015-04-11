@@ -2,6 +2,9 @@
   'use strict';
 
   angular.module('treeApp', ['ui.tree'])
+  .config(function($compileProvider) {
+    $compileProvider.debugInfoEnabled(false);
+  })
   .controller('treeCtrl', function($scope, $filter) {
 
     $scope.remove = function(scope) {
